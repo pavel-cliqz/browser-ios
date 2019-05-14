@@ -8,6 +8,11 @@
 
 import Foundation
 import UserNotifications
+import Shared
+
+enum NotificationType: String {
+    case subscriptionReminder = "subscriptionReminder"
+}
 
 class NotificationsManager {
     func requestAuthorization() {
@@ -58,7 +63,44 @@ class NotificationsManager {
     }
     
     private func createSubscriptionReminderRequests() -> [UNNotificationRequest] {
-        return []
+        guard let installationDate = DeviceInfo.appInstallationDate() else  {
+            return []
+        }
+        var requests:[UNNotificationRequest] = []
+        for i in self.subscriptionReminderDays {
+            if let scheduleDate = self.createScheduleDate(byAdding: i, to: installationDate), let request = self.createSubscriptionReminderRequest(triggerDate: scheduleDate) {
+                requests.append(request)
+            }
+        }
+        
+        return requests
     }
     
+    private func createSubscriptionReminderRequest(triggerDate: Date) -> UNNotificationRequest? {
+        guard triggerDate.compare(Date()) == .orderedDescending else {
+            return nil
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.body = "Limited time offer: 50% off for Lumen protection + VPN. Code: LUMEN2019" //TODO NSLocalizedString("<#T##key: String##String#>", comment: "")
+        content.title = "Hurry up!" // TODO:
+        
+        let calendar = Calendar.current
+        let triggerDateComponents = calendar.dateComponents([.day, .year, .month, .timeZone, .hour, .second, .minute, .calendar], from: triggerDate)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
+        return UNNotificationRequest(identifier: NotificationType.subscriptionReminder.rawValue, content: content, trigger: trigger)
+    }
+    
+    private func createScheduleDate(byAdding days: Int, to date: Date) -> Date? {
+        let calendar = Calendar.current
+        let triggerDate = calendar.date(byAdding: .day, value: days, to: date)
+        var dateComponent = calendar.dateComponents([.day, .year, .month, .timeZone, .calendar], from: triggerDate!)
+        dateComponent.hour = 9
+        return calendar.date(from: dateComponent)
+    }
+    
+    private var subscriptionReminderDays: [Int] {
+        return [3,7,9,20]
+    }
 }
