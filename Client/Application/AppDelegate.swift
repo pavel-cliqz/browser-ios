@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
     }
     
     //Cliqz: local notifications manager
+    #if PAID
     let notificationsManager = NotificationsManager()
+    #endif
 
     @discardableResult func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //
@@ -232,7 +234,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Cliqz: scheduling notifications
+        #if PAID
         self.notificationsManager.scheduleNotifications()
+        #endif
         
         // We have only five seconds here, so let's hope this doesn't take too long.
         self.profile?.shutdown()
@@ -329,7 +333,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         }
         
         // Cliqz request provisional push notifications
+        #if PAID
         self.notificationsManager.requestAuthorization()
+        #endif
         
         window!.makeKeyAndVisible()
 
@@ -434,7 +440,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         //
         
         // Cliqz: scheduling notifications
+        #if PAID
         self.notificationsManager.scheduleNotifications()
+        #endif
 
         let defaults = UserDefaults()
         defaults.set(true, forKey: "ApplicationCleanlyBackgrounded")
@@ -492,7 +500,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIViewControllerRestorati
         LegacyTelemetryHelper.logStateChanged(state: "Inactive")
         
         // Cliqz: removing all scheduled notifications
+        #if PAID
         self.notificationsManager.removeAllScheduledNotificaions()
+        #endif
     }
 
     fileprivate func updateAuthenticationInfo() {

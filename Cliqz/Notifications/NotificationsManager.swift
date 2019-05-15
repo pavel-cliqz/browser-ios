@@ -10,15 +10,28 @@ import Foundation
 import UserNotifications
 import Shared
 
-enum NotificationType: String {
-    case subscriptionReminder = "subscriptionReminder"
+enum SubscriptionReminderOption: Int, CaseIterable {
+    case dayThree = 3
+    case daySeven = 7
+    case dayNine = 9
+    case dayTwenty = 20
+    
+    func identifier() -> String {
+        return String("SubscriptionReminderAtDay\(self.rawValue)")
+    }
 }
 
-class NotificationsManager {
+class NotificationsManager: NSObject {
+    
+    private let subscriptionReminderCategoryKey = "cliqz.subscriptionReminderCategory"
+    
     func requestAuthorization() {
         if #available(iOS 12.0, *) {
             let center = UNUserNotificationCenter.current()
+            center.delegate = self
             center.requestAuthorization(options: [.provisional, .alert, .sound]) { _,_  in }
+            
+            self.registerNotificationCategories()
         }
     }
     
@@ -28,16 +41,7 @@ class NotificationsManager {
             center.getNotificationSettings { (setting) in
                 if setting.authorizationStatus == .provisional || setting.authorizationStatus == .authorized {
                     self.removeAllScheduledNotificaions()
-                    
-                    let center = UNUserNotificationCenter.current()
-                    let requests = self.createNotificationReqeusts()
-                    for request in requests {
-                        center.add(request) { (error) in
-                            if let error = error {
-                                print("error \(error.localizedDescription)")
-                            }
-                        }
-                    }
+                    self.addNotificationRequests()
                 } else {
                     print("notification authorization status - \(setting.authorizationStatus.rawValue)")
                 }
@@ -51,6 +55,22 @@ class NotificationsManager {
     }
     
     // MARK: private methods
+    private func addNotificationRequests() {
+        let center = UNUserNotificationCenter.current()
+        let requests = self.createNotificationReqeusts()
+        for request in requests {
+            center.add(request) { (error) in
+                if let error = error {
+                    print("error \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    private func registerNotificationCategories() {
+        let subscriptionReminderCategory = UNNotificationCategory(identifier: self.subscriptionReminderCategoryKey, actions: [], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([subscriptionReminderCategory])
+    }
     
     private func createNotificationReqeusts() -> [UNNotificationRequest] {
         let currentSubscription = SubscriptionController.shared.getCurrentSubscription()
@@ -67,8 +87,9 @@ class NotificationsManager {
             return []
         }
         var requests:[UNNotificationRequest] = []
-        for i in self.subscriptionReminderDays {
-            if let scheduleDate = self.createScheduleDate(byAdding: i, to: installationDate), let request = self.createSubscriptionReminderRequest(triggerDate: scheduleDate) {
+        let subscriptionReminderDays = SubscriptionReminderOption.allCases
+        for day in subscriptionReminderDays {
+            if let scheduleDate = self.createScheduleDate(byAdding: day.rawValue, to: installationDate), let request = self.createSubscriptionReminderRequest(triggerDate: scheduleDate, option: day) {
                 requests.append(request)
             }
         }
@@ -76,20 +97,19 @@ class NotificationsManager {
         return requests
     }
     
-    private func createSubscriptionReminderRequest(triggerDate: Date) -> UNNotificationRequest? {
+    private func createSubscriptionReminderRequest(triggerDate: Date, option: SubscriptionReminderOption) -> UNNotificationRequest? {
         guard triggerDate.compare(Date()) == .orderedDescending else {
             return nil
         }
         
         let content = UNMutableNotificationContent()
         content.body = "Limited time offer: 50% off for Lumen protection + VPN. Code: LUMEN2019" //TODO NSLocalizedString("<#T##key: String##String#>", comment: "")
-        content.title = "Hurry up!" // TODO:
         
-        let calendar = Calendar.current
-        let triggerDateComponents = calendar.dateComponents([.day, .year, .month, .timeZone, .hour, .second, .minute, .calendar], from: triggerDate)
+        let timeInterval = triggerDate.timeIntervalSince(Date())
+        print("trigger date \(timeInterval))")
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDateComponents, repeats: false)
-        return UNNotificationRequest(identifier: NotificationType.subscriptionReminder.rawValue, content: content, trigger: trigger)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        return UNNotificationRequest(identifier: option.identifier(), content: content, trigger: trigger)
     }
     
     private func createScheduleDate(byAdding days: Int, to date: Date) -> Date? {
@@ -99,8 +119,10 @@ class NotificationsManager {
         dateComponent.hour = 9
         return calendar.date(from: dateComponent)
     }
-    
-    private var subscriptionReminderDays: [Int] {
-        return [3,7,9,20]
+}
+
+extension NotificationsManager: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        LegacyTelemetryHelper.logPush(action: "click", topic: "discount")
     }
 }
