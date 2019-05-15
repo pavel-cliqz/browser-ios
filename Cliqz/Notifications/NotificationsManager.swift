@@ -103,10 +103,9 @@ class NotificationsManager: NSObject {
         }
         
         let content = UNMutableNotificationContent()
-        content.body = "Limited time offer: 50% off for Lumen protection + VPN. Code: LUMEN2019" //TODO NSLocalizedString("<#T##key: String##String#>", comment: "")
+        content.body = NSLocalizedString("Limited time offer: 50% off for Lumen protection + VPN. Code: LUMEN2019", tableName: "Lumen", comment: "Local Notification message")
         
         let timeInterval = triggerDate.timeIntervalSince(Date())
-        print("trigger date \(timeInterval))")
         
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         return UNNotificationRequest(identifier: option.identifier(), content: content, trigger: trigger)
