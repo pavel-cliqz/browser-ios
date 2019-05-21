@@ -45,13 +45,17 @@ class UpgradLumenViewController: UIViewController {
 
     private var subscriptionsDataSource:StandardSubscriptionsDataSource!
 
-	private let promoCodesManager = PromoCodesManager()
-
+	init(_ dataSource: StandardSubscriptionsDataSource) {
+		subscriptionsDataSource = dataSource
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder aDecoder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // TODO: data source should be given from outisde
-        self.subscriptionsDataSource = StandardSubscriptionsDataSource(products:    SubscriptionController.shared.standardSubscriptionProducts)
-        
+        super.viewDidLoad()		
         self.setupComponents()
         self.setStyles()
         self.setConstraints()
@@ -347,9 +351,9 @@ class UpgradLumenViewController: UIViewController {
 	}
 
 	private func applyPromoCode(code: String?) {
-		if let code = code, promoCodesManager.isValidPromoCode(code),
-			let promoType = promoCodesManager.getPromoType(code) {
-			self.navigateToPromoSubscription(promoType: promoType)
+		if let code = code, PromoCodesManager.shared.isValidPromoCode(code),
+			let promoViewController = UpgradeViewControllerFactory.promoUpgradeViewController(promoCode: code) {
+			self.navigationController?.pushViewController(promoViewController, animated: false)
 		} else {
 			showInvalidPomorAlert()
 		}
@@ -360,11 +364,6 @@ class UpgradLumenViewController: UIViewController {
 		let closeAction = UIAlertAction(title: NSLocalizedString("Close", tableName: "Lumen", comment: "[Upgrade flow] Close button title on invalid promo  code alert"), style: .cancel)
 		alertView.addAction(closeAction)
 		self.present(alertView, animated: true)
-	}
-
-	private func navigateToPromoSubscription(promoType: LumenSubscriptionPromoPlanType) {
-		let promoViewController = PromoUpgradeViewController(promoType)
-		self.navigationController?.pushViewController(promoViewController, animated: false)
 	}
 
     #endif
