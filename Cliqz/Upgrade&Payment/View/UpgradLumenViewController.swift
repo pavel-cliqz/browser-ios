@@ -341,6 +341,7 @@ class UpgradLumenViewController: UIViewController {
     }
 
 	@objc func enterPromoCode() {
+        LegacyTelemetryHelper.logPayment(action: "click", target: "code")
 		var promoCodeTextField: UITextField?
 		let alertView = UIAlertController(title: NSLocalizedString("Enter your promo code", tableName: "Lumen", comment: "[Upgrade flow] Promo code alert view title") , message: nil, preferredStyle: .alert)
 		alertView.addTextField { (textField) in
@@ -362,11 +363,12 @@ class UpgradLumenViewController: UIViewController {
 			let promoViewController = UpgradeViewControllerFactory.promoUpgradeViewController(promoCode: code) {
 			self.navigationController?.pushViewController(promoViewController, animated: false)
 		} else {
-			showInvalidPomorAlert()
+			showInvalidPromoAlert()
 		}
 	}
 
-	private func showInvalidPomorAlert() {
+	private func showInvalidPromoAlert() {
+        LegacyTelemetryHelper.logPromoPayment(action: "show", view: "error", topic: "not_eligible")
 		let alertView = UIAlertController(title: NSLocalizedString("Sorry, this code does not seem to work", tableName: "Lumen", comment: "[Upgrade flow] Invalid Promo code alert view title") , message: nil, preferredStyle: .alert)
 		let closeAction = UIAlertAction(title: NSLocalizedString("Close", tableName: "Lumen", comment: "[Upgrade flow] Close button title on invalid promo  code alert"), style: .cancel)
 		alertView.addAction(closeAction)

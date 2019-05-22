@@ -10,8 +10,10 @@ import Foundation
 
 class PromoSubscriptionsDataSource {
 	
+    var promoType: LumenSubscriptionPromoPlanType
+    
     private var subscriptionInfo: SubscriptionCellInfo?
-    private var promoType: LumenSubscriptionPromoPlanType
+    
 	
     init(promoType: LumenSubscriptionPromoPlanType, availablePromoSubscription: [LumenSubscriptionProduct]) {
         self.promoType = promoType
@@ -39,6 +41,15 @@ class PromoSubscriptionsDataSource {
         return self.promoType.code
     }
     
+    func telemeterySignals() -> [String:String] {
+        switch self.promoType.type {
+        case .half:
+            return ["target" : "subscribe_basic_vpn_offer_half", "view" : "offer_half" ]
+        case .freeMonth:
+            return ["target" : "subscribe_basic_vpn_offer_free", "view" : "offer_free" ]
+        }
+    }
+    
 	func getConditionText() -> String {
         switch self.promoType.type {
         case .half:
@@ -49,14 +60,6 @@ class PromoSubscriptionsDataSource {
 	}
     
     // MARK: Private methods
-    private func telemeterySignals() -> [String:String] {
-        switch self.promoType.type {
-        case .half:
-            return ["target" : "subscribe_basic_vpn_offer_half", "view" : "offer_half" ]
-        case .freeMonth:
-            return ["target" : "subscribe_basic_vpn_offer_free", "view" : "offer_free" ]
-        }
-    }
     
     private func offerDetails(plan: LumenSubscriptionPromoPlanType) -> String? {
         switch plan.type {

@@ -24,10 +24,11 @@ class LegacyTelemetryHelper: NSObject {
         sendSignal(signal)
     }
     
-    class func logPromoPayment(action: String, target: String? = nil, view: String? = nil) {
+    class func logPromoPayment(action: String, target: String? = nil, view: String? = nil, topic: String? = nil) {
         var signal: [String : Any] = ["type": "payment", "action": action, "version": 2]
         if let target = target { signal["target"] = target }
         if let view = view { signal["view"] = view }
+        if let topic = topic { signal["topic"] = topic }
         
         sendSignal(signal)
     }

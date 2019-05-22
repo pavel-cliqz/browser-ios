@@ -20,7 +20,6 @@ class PromoUpgradeViewController: UIViewController {
 	private let eulaButton = UIButton()
 	private let privacyPolicyButton = UIButton()
 	private let dataSource: PromoSubscriptionsDataSource
-    private var telemetrySignals: [String:String]?
     private var selectedProduct: LumenSubscriptionProduct?
     
 	init(_ dataSource: PromoSubscriptionsDataSource) {
@@ -46,7 +45,8 @@ class PromoUpgradeViewController: UIViewController {
                                                name: .ProductPurchaseErrorNotification,
                                                object: nil)
         
-        LegacyTelemetryHelper.logPayment(action: "show")
+        let telemetryView = self.dataSource.telemeterySignals()["view"]
+        LegacyTelemetryHelper.logPromoPayment(action: "show", view: telemetryView)
     }
     
     deinit {
@@ -54,9 +54,9 @@ class PromoUpgradeViewController: UIViewController {
 	}
     
     @objc func handlePurchaseSuccessNotification(_ notification: Notification) {
-        LegacyTelemetryHelper.logPayment(action: "success", target: self.telemetrySignals?["target"])
+        let telemetrySignals = self.dataSource.telemeterySignals()
+        LegacyTelemetryHelper.logPromoPayment(action: "success", target: telemetrySignals["target"], view: telemetrySignals["view"])
         self.selectedProduct = nil
-        self.telemetrySignals = nil
         self.dismiss(animated: true)
     }
     
@@ -65,8 +65,8 @@ class PromoUpgradeViewController: UIViewController {
             return
         }
         self.selectedProduct = nil
-        
-        LegacyTelemetryHelper.logPromoPayment(action: "error", target: self.telemetrySignals?["target"], view: self.telemetrySignals?["view"])
+        let telemetrySignals = self.dataSource.telemeterySignals()
+        LegacyTelemetryHelper.logPromoPayment(action: "error", target: telemetrySignals["target"], view: telemetrySignals["view"])
         let errorDescirption = NSLocalizedString("We are sorry, but something went wrong. The payment was not successful, please try again.", tableName: "Lumen", comment: "Error message when there is failing payment transaction")
         let alertController = UIAlertController(title: "", message: errorDescirption, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", tableName: "Lumen", comment: "Retry button title in payment failing transaction alert"), style: .default) {(action) in
@@ -180,7 +180,6 @@ extension PromoUpgradeViewController: UITableViewDelegate, UITableViewDataSource
 		cell.subscriptionInfo = subscriptionInfo
         cell.buyButtonHandler = {[weak self] subscriptionProduct in
             self?.selectedProduct = subscriptionProduct
-            self?.telemetrySignals = subscriptionInfo?.telemetrySignals
             SubscriptionController.shared.buyProduct(subscriptionProduct.product)
             LegacyTelemetryHelper.logPromoPayment(action: "click", target: subscriptionInfo?.telemetrySignals["target"], view: subscriptionInfo?.telemetrySignals["view"])
         }
