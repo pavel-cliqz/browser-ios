@@ -11,6 +11,7 @@ import StoreKit
 
 struct SubscriptionCellInfo {
 	let priceDetails: String?
+	let promoPriceDetails: String?
 	let offerDetails: String?
 	let isSubscribed: Bool
     let height: CGFloat
@@ -57,5 +58,11 @@ struct SubscriptionCellInfo {
         let formattedPrice = formatter.string(from: lumenProduct.product.introductoryPrice?.price ?? lumenProduct.product.price) ?? ""
         return formattedPrice
     }
-    
+	
+	var promoPriceLocalizedDetails: String? {
+		if let promoPriceDetails = self.promoPriceDetails {
+			return String("\(promoPriceDetails) \(self.standardPrice)\(NSLocalizedString("/MONTH", tableName: "Lumen", comment: "Subscription price period"))")
+		}
+		return nil
+	}
 }

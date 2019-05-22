@@ -18,7 +18,7 @@ class PromoSubscriptionsDataSource {
     init(promoType: LumenSubscriptionPromoPlanType, availablePromoSubscription: [LumenSubscriptionProduct]) {
         self.promoType = promoType
         if let promoProduct = availablePromoSubscription.filter({ $0.product.productIdentifier == promoType.promoID }).first {
-            self.subscriptionInfo = SubscriptionCellInfo(priceDetails: nil, offerDetails: self.offerDetails(plan: promoType), isSubscribed: SubscriptionController.shared.hasSubscription(promoProduct.subscriptionPlan), height: 150, telemetrySignals: self.telemeterySignals(), lumenProduct: promoProduct)
+			self.subscriptionInfo = SubscriptionCellInfo(priceDetails: nil, promoPriceDetails: getPromoPriceDetails(), offerDetails: self.offerDetails(plan: promoType), isSubscribed: SubscriptionController.shared.hasSubscription(promoProduct.subscriptionPlan), height: 150, telemetrySignals: self.telemeterySignals(), lumenProduct: promoProduct)
         }
 	}
 
@@ -49,7 +49,16 @@ class PromoSubscriptionsDataSource {
             return ["target" : "subscribe_basic_vpn_offer_free", "view" : "offer_free" ]
         }
     }
-    
+
+	func getPromoPriceDetails() -> String {
+		switch self.promoType.type {
+		case .half:
+			return NSLocalizedString("For 2 months, then", tableName: "Lumen", comment: "Lumen free month price subtitle")
+		case .freeMonth:
+			return NSLocalizedString("For 1 month, then", tableName: "Lumen", comment: "Lumen free month price subtitle")
+		}
+	}
+
 	func getConditionText() -> String {
         switch self.promoType.type {
         case .half:
