@@ -165,7 +165,7 @@ class SubscriptionTableViewCell: UITableViewCell {
     
 	private func configureCell(_ subscriptionInfo: SubscriptionCellInfo) {
         nameLabel.text = subscriptionInfo.name
-        priceLabel.text = subscriptionInfo.price //premiumType.getPrice()
+        priceLabel.text = subscriptionInfo.localizedPrice //premiumType.getPrice()
         descriptionLabel.text = subscriptionInfo.description //premiumType.getDescription()
 		bestOfferLabel.text = subscriptionInfo.offerDetails //NSLocalizedString("BEST OFFER LIMITED TIME ONLY", tableName: "Lumen", value:"BEST OFFER\nLIMITED TIME ONLY", comment: "BEST OFFER\nLIMITED TIME ONLY")
 

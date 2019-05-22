@@ -15,13 +15,9 @@ struct SubscriptionCellInfo {
 	let isSubscribed: Bool
     let height: CGFloat
     var lumenProduct: LumenSubscriptionProduct
-    var price: String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = lumenProduct.product.priceLocale
-        let formattedPrice = formatter.string(from: lumenProduct.product.introductoryPrice?.price ?? lumenProduct.product.price) ?? ""
+    var localizedPrice: String {
         // in future the period also can be dinamically taken from product. see subscriptionPeriod property
-        return String("\(formattedPrice) \(NSLocalizedString("/MONTH", tableName: "Lumen", comment: "Subscription price period"))")
+        return String("\(self.introductoryPrice) \(NSLocalizedString("/MONTH", tableName: "Lumen", comment: "Subscription price period"))")
     }
     var name: String {
         switch self.lumenProduct.subscriptionPlan {
@@ -43,5 +39,21 @@ struct SubscriptionCellInfo {
         case .basicAndVpn:
             return NSLocalizedString("ULTIMATE PROTECTION ONLINE PROTECTION FROM HACKERS WITH VPN", tableName: "Lumen", value: "ULTIMATE PROTECTION ONLINE +\nPROTECTION FROM HACKERS WITH VPN", comment: "Basic + VPN Subscription Description")
         }
+    }
+    
+    var standardPrice: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = lumenProduct.product.priceLocale
+        let formattedPrice = formatter.string(from: lumenProduct.product.price) ?? ""
+        return formattedPrice
+    }
+    
+    var introductoryPrice: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = lumenProduct.product.priceLocale
+        let formattedPrice = formatter.string(from: lumenProduct.product.introductoryPrice?.price ?? lumenProduct.product.price) ?? ""
+        return formattedPrice
     }
 }

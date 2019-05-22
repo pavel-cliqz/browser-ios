@@ -10,7 +10,7 @@ import Foundation
 
 class PromoSubscriptionsDataSource {
 	
-    private var subscriptionInfo: SubscriptionCellInfo? 
+    private var subscriptionInfo: SubscriptionCellInfo?
 	
     init(promoType: LumenSubscriptionPromoPlanType, availablePromoSubscription: [LumenSubscriptionProduct]) {
         if let promoProduct = availablePromoSubscription.filter({ $0.product.productIdentifier == promoType.promoID }).first {
@@ -26,7 +26,6 @@ class PromoSubscriptionsDataSource {
         return self.subscriptionInfo?.height ?? 0
 	}
 
-	//TODO offr text
 	func subscriptionInfo(indexPath: IndexPath) -> SubscriptionCellInfo? {
 		guard indexPath.row == 0 else {
 			return nil
@@ -34,14 +33,8 @@ class PromoSubscriptionsDataSource {
 		return self.subscriptionInfo
 	}
 
-	func getName() -> String {
-		return NSLocalizedString("BASIC + VPN", tableName: "Lumen", comment: "Basic + VPN Subscription name")
-		// GET 1 MONTH nFOR FREE
-	}
-
 	func getConditionText() -> String {
-		// TODO: Should be localized and parametrized
-		return "Payment of 2.49€ will be charged to your Apple ID account each month for 2 months. The subscription automatically renews for 4.99€ per month after 2 months. Subscriptions will be applied to your iTunes account on confirmation. Your account will be charged for renewal within 24 hours prior to the end of the current period at the cost mentioned before. You can cancel anytime in your iTunes account settings until 24 hours before the end of the current period. Any unused portion of a free trial will be forfeited if you purchase a subscription."
+        return String(format: NSLocalizedString("Payment of %@ will be charged to your Apple ID account each month for 2 months. The subscription automatically renews for %@ per month after 2 months. Subscriptions will be applied to your iTunes account on confirmation. Your account will be charged for renewal within 24 hours prior to the end of the current period at the cost mentioned before. You can cancel anytime in your iTunes account settings until 24 hours before the end of the current period. Any unused portion of a free trial will be forfeited if you purchase a subscription.", tableName: "Lumen", comment: "Lumenconditions for promo"), self.subscriptionInfo?.introductoryPrice ?? "", self.subscriptionInfo?.standardPrice ?? "")
 	}
     
     
