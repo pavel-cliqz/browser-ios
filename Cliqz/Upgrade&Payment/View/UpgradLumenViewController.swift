@@ -25,7 +25,7 @@ class UpgradLumenViewController: UIViewController {
     private let logoImage = UIImageView()
     private let bundlesView = UITableView()
     private let restoreButton = UIButton()
-	private let promoCodeButton = UIButton()
+	private var promoCodeButton: UIButton?
     private let conditionButton = UIButton()
     private let arrowImage = UIImageView()
     private let conditionsLabel = UILabel()
@@ -103,8 +103,14 @@ class UpgradLumenViewController: UIViewController {
         restoreButton.addTarget(self, action: #selector(restoreSubscription), for: .touchUpInside)
         restoreButton.setTitle(NSLocalizedString("Restore Subscription", tableName: "Lumen", comment: "[Upgrade Flow] Restore Subscription button"), for: .normal)
 		
-		promoCodeButton.addTarget(self, action: #selector(enterPromoCode), for: .touchUpInside)
-		promoCodeButton.setTitle(NSLocalizedString("Promo Code", tableName: "Lumen", comment: "[Upgrade Flow] Promo Code Button title"), for: .normal)
+		switch SubscriptionController.shared.getCurrentSubscription() {
+		case .limited, .trial(_):
+			promoCodeButton = UIButton()
+			promoCodeButton?.setTitle(NSLocalizedString("Promo Code", tableName: "Lumen", comment: "[Upgrade Flow] Promo Code Button title"), for: .normal)
+			promoCodeButton?.addTarget(self, action: #selector(enterPromoCode), for: .touchUpInside)
+		default:
+			break
+		}
 	
 		// TODO: Commented for now to fix the layout for Apple submission, but we might need to change again the UI in near future.
 	
@@ -164,12 +170,13 @@ class UpgradLumenViewController: UIViewController {
         restoreButton.clipsToBounds = true
         restoreButton.setBackgroundImage(UIImage.from(color: UIColor.cliqzBlueThreeSecondary), for: .highlighted)
 		
-		promoCodeButton.setTitleColor(UIColor.lumenTextBlue, for: .normal)
-		promoCodeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
-		promoCodeButton.layer.borderColor = UIColor.lumenTextBlue.cgColor
-		promoCodeButton.clipsToBounds = true
-		promoCodeButton.setBackgroundImage(UIImage.from(color: UIColor.cliqzBlueThreeSecondary), for: .highlighted)
-	
+		if let promoCodeButton = self.promoCodeButton {
+			promoCodeButton.setTitleColor(UIColor.lumenTextBlue, for: .normal)
+			promoCodeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+			promoCodeButton.layer.borderColor = UIColor.lumenTextBlue.cgColor
+			promoCodeButton.clipsToBounds = true
+			promoCodeButton.setBackgroundImage(UIImage.from(color: UIColor.cliqzBlueThreeSecondary), for: .highlighted)
+		}
         conditionButton.setTitleColor(UIColor.lumenTextBlue, for: .normal)
         conditionButton.titleLabel?.font = UIFont.systemFont(ofSize: 12.0, weight: .medium)
         
@@ -305,7 +312,6 @@ class UpgradLumenViewController: UIViewController {
                     make.top.equalTo(self.arrowImage.snp.bottom).offset(10.0)
                 }
             }
-            
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.arrowImage.image = UIImage(named: "Conditions_Arrow_Up")
@@ -405,18 +411,19 @@ extension UpgradLumenViewController: UITableViewDelegate, UITableViewDataSource 
 		// TODO: if we keep this solutin the height should be calculated
 		let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 210))
 		footerView.addSubview(self.restoreButton)
-		footerView.addSubview(self.promoCodeButton)
 		footerView.addSubview(self.conditionsLabel)
 		footerView.addSubview(self.eulaButton)
 		footerView.addSubview(self.privacyPolicyButton)
-	
+		if let promoCodeButton = self.promoCodeButton{
+			footerView.addSubview(promoCodeButton)
+			promoCodeButton.snp.makeConstraints { (make) in
+				make.right.equalToSuperview().inset(30.0)
+				make.top.equalToSuperview()
+				make.height.equalTo(30.0)
+			}
+		}
 		restoreButton.snp.makeConstraints { (make) in
 			make.left.equalToSuperview().inset(30.0)
-			make.top.equalToSuperview()
-			make.height.equalTo(30.0)
-		}
-		promoCodeButton.snp.makeConstraints { (make) in
-			make.right.equalToSuperview().inset(30.0)
 			make.top.equalToSuperview()
 			make.height.equalTo(30.0)
 		}

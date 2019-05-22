@@ -12,6 +12,8 @@ import UIKit
 
 class PromoUpgradeViewController: UIViewController {
 	
+	private var closeButton: UIButton?
+
 	private let promoValidityLabel = UILabel()
 	private let promoCodeLabel = UILabel()
 
@@ -34,6 +36,9 @@ class PromoUpgradeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.navigationController?.navigationBar.tintColor = UIColor.lumenTextBlue
+		if self.navigationController == nil {
+			showCloseButton()
+		}
 		setupComponents()
 		setConstraints()
         
@@ -124,6 +129,15 @@ class PromoUpgradeViewController: UIViewController {
 	}
 
 	private func setConstraints() {
+		if let closeButton = self.closeButton {
+			closeButton.snp.makeConstraints { (make) in
+				make.trailing.equalToSuperview().inset(10.0)
+				make.top.equalTo(self.view.safeArea.top).offset(10.0)
+				make.width.equalTo(44.0)
+				make.height.equalTo(44.0)
+			}
+		}
+
 		promoValidityLabel.snp.makeConstraints { (make) in
 			make.centerX.equalToSuperview()
 			make.top.equalToSuperview().offset(100)
@@ -134,12 +148,22 @@ class PromoUpgradeViewController: UIViewController {
 			make.top.equalTo(promoValidityLabel.snp.bottom)
 			make.height.equalTo(30)
 		}
-		
 		subscriptionsTableView.snp.makeConstraints { (make) in
 			make.top.equalTo(self.promoCodeLabel.snp.bottom).offset(20)
 			make.leading.trailing.equalToSuperview()
 			make.bottom.equalToSuperview()
 		}
+	}
+
+	private func showCloseButton() {
+		self.closeButton = UIButton(type: .custom)
+		self.closeButton?.setImage(UIImage(named: "Close_UpgradeView"), for: .normal)
+		self.view.addSubview(self.closeButton!)
+		self.closeButton?.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+	}
+
+	@objc func closeView() {
+		self.dismiss(animated: true, completion: nil)
 	}
 
 	@objc func showEula() {

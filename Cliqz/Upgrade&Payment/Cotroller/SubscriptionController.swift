@@ -11,8 +11,6 @@ import StoreKit
 import RxSwift
 
 public class SubscriptionController {
-    
-   
 
     public static let shared = SubscriptionController()
     
