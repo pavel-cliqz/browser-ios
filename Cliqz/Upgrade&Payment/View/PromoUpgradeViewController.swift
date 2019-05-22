@@ -23,6 +23,7 @@ class PromoUpgradeViewController: UIViewController {
 	private let privacyPolicyButton = UIButton()
 	private let dataSource: PromoSubscriptionsDataSource
     private var selectedProduct: LumenSubscriptionProduct?
+    private let gradient = BrowserGradientView()
     
 	init(_ dataSource: PromoSubscriptionsDataSource) {
 		self.dataSource = dataSource
@@ -57,6 +58,14 @@ class PromoUpgradeViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
 	}
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return ThemeManager.instance.statusBarStyle
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     @objc func handlePurchaseSuccessNotification(_ notification: Notification) {
         let telemetrySignals = self.dataSource.telemeterySignals()
@@ -126,6 +135,9 @@ class PromoUpgradeViewController: UIViewController {
 		privacyPolicyButton.setTitleColor(UIColor.white, for: .normal)
 		privacyPolicyButton.setAttributedTitle(privacyPolicyButtonTitle, for: .normal)
 		privacyPolicyButton.addTarget(self, action: #selector(showPrivacyPolicy), for: .touchUpInside)
+        
+        self.view.addSubview(gradient)
+        self.view.sendSubview(toBack: gradient)
 	}
 
 	private func setConstraints() {
@@ -137,6 +149,10 @@ class PromoUpgradeViewController: UIViewController {
 				make.height.equalTo(44.0)
 			}
 		}
+        
+        gradient.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
 
 		promoValidityLabel.snp.makeConstraints { (make) in
 			make.centerX.equalToSuperview()

@@ -70,6 +70,7 @@ class UpgradLumenViewController: UIViewController {
         
         LegacyTelemetryHelper.logPayment(action: "show")
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -96,6 +97,15 @@ class UpgradLumenViewController: UIViewController {
 //        logoImage.image = UIImage(named: "Lumen_Logo")
 //        containerView.addSubview(logoImage)
 		
+        switch SubscriptionController.shared.getCurrentSubscription() {
+        case .limited, .trial(_):
+            promoCodeButton = UIButton()
+            promoCodeButton?.setTitle(NSLocalizedString("Promo Code", tableName: "Lumen", comment: "[Upgrade Flow] Promo Code Button title"), for: .normal)
+            promoCodeButton?.addTarget(self, action: #selector(enterPromoCode), for: .touchUpInside)
+        default:
+            break
+        }
+        
         setupBundlesView()
         containerView.addSubview(bundlesView)
         
@@ -103,15 +113,6 @@ class UpgradLumenViewController: UIViewController {
         restoreButton.addTarget(self, action: #selector(restoreSubscription), for: .touchUpInside)
         restoreButton.setTitle(NSLocalizedString("Restore Subscription", tableName: "Lumen", comment: "[Upgrade Flow] Restore Subscription button"), for: .normal)
 		
-		switch SubscriptionController.shared.getCurrentSubscription() {
-		case .limited, .trial(_):
-			promoCodeButton = UIButton()
-			promoCodeButton?.setTitle(NSLocalizedString("Promo Code", tableName: "Lumen", comment: "[Upgrade Flow] Promo Code Button title"), for: .normal)
-			promoCodeButton?.addTarget(self, action: #selector(enterPromoCode), for: .touchUpInside)
-		default:
-			break
-		}
-	
 		// TODO: Commented for now to fix the layout for Apple submission, but we might need to change again the UI in near future.
 	
 //        restoreButton.layer.borderWidth = 1.0
@@ -148,8 +149,8 @@ class UpgradLumenViewController: UIViewController {
         privacyPolicyButton.setAttributedTitle(privacyPolicyButtonTitle, for: .normal)
         privacyPolicyButton.addTarget(self, action: #selector(showPrivacyPolicy), for: .touchUpInside)
 
-		self.navigationController?.view.addSubview(gradient)
-        self.navigationController?.view.sendSubview(toBack: gradient)
+		self.view.addSubview(gradient)
+        self.view.sendSubview(toBack: gradient)
     }
     
     private func setupBundlesView() {
