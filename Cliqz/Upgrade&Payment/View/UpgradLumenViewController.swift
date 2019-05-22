@@ -386,8 +386,7 @@ extension UpgradLumenViewController: UITableViewDelegate, UITableViewDataSource 
         cell.buyButtonHandler = { [weak self] subscriptionProduct in
             SubscriptionController.shared.buyProduct(subscriptionProduct.product)
             self?.lastChosenProduct = subscriptionProduct
-            // TODO: check for promo
-            self?.telemetryTarget = subscriptionProduct.telemeteryTarget()
+            self?.telemetryTarget = subscriptionInfo?.telemetryTarget
             LegacyTelemetryHelper.logPayment(action: "click", target: self?.telemetryTarget)
         }
         return cell

@@ -44,8 +44,7 @@ class PromoUpgradeViewController: UIViewController {
 		self.promoValidityLabel.textAlignment = .center
 		self.view.addSubview(self.promoValidityLabel)
 
-		// TODO: get from DataSource
-		//self.promoCodeLabel.text = self.promoType.code
+        self.promoCodeLabel.text = self.dataSource.promoText()
 		self.promoCodeLabel.textAlignment = .center
 		self.promoCodeLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
 		self.promoCodeLabel.textColor = UIColor(colorString: "D9A8B5")
@@ -138,13 +137,10 @@ extension PromoUpgradeViewController: UITableViewDelegate, UITableViewDataSource
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! SubscriptionTableViewCell
 		let subscriptionInfo = self.dataSource.subscriptionInfo(indexPath: indexPath)
 		cell.subscriptionInfo = subscriptionInfo
-//		cell.premiumType = self.premiumTypes[indexPath.row]
-//		cell.buyButtonHandler = { [weak self] premiumType in
-//			SubscriptionController.shared.buyProduct(premiumType)
-//			self?.lastShosenPremiumType = premiumType
-//			self?.telemetryTarget = premiumType.getTelemeteryTarget()
-//			LegacyTelemetryHelper.logPayment(action: "click", target: self?.telemetryTarget)
-//		}
+        cell.buyButtonHandler = {subscriptionProduct in
+            SubscriptionController.shared.buyProduct(subscriptionProduct.product)
+            LegacyTelemetryHelper.logPayment(action: "click", target: subscriptionInfo?.telemetryTarget)
+        }
 		return cell
 	}
 	
