@@ -45,6 +45,9 @@ class StandardSubscriptionsDataSource {
             let info = SubscriptionCellInfo(priceDetails: nil, offerDetails: offerDetails, isSubscribed: SubscriptionController.shared.hasSubscription(product.subscriptionPlan), height: height, lumenProduct: product)
             self.subscriptionInfos.append(info)
         }
+        self.subscriptionInfos.sort { (left, right) -> Bool in
+            return left.lumenProduct.subscriptionPlan < right.lumenProduct.subscriptionPlan
+        }
     }
 
 }

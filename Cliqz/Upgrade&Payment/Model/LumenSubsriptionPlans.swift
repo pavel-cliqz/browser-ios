@@ -73,6 +73,22 @@ extension LumenSubscriptionPlanType: Equatable {
             }
         }
     }
+    
+    public static func <(lhs: LumenSubscriptionPlanType, rhs:LumenSubscriptionPlanType) -> Bool {
+        switch lhs {
+        case .basic(_):
+           return true
+        case .basicAndVpn(_):
+            switch rhs {
+            case .vpn:
+                return true
+            default:
+                return false
+            }
+        case .vpn:
+                return false
+        }
+    }
 }
 
 enum PromoType: String {
