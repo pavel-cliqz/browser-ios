@@ -43,13 +43,15 @@ class UpgradLumenViewController: UIViewController {
     private var isConditionsHidden = true
     private var lastChosenProduct: LumenSubscriptionProduct?
 
-    private let subscriptionsDataSource = StandardSubscriptionsDataSource(products: SubscriptionController.shared.standardSubscriptionProducts)
+    private var subscriptionsDataSource:StandardSubscriptionsDataSource!
 
 	private let promoCodesManager = PromoCodesManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // TODO: data source should be given from outisde
+        self.subscriptionsDataSource = StandardSubscriptionsDataSource(products:    SubscriptionController.shared.standardSubscriptionProducts)
+        
         self.setupComponents()
         self.setStyles()
         self.setConstraints()
