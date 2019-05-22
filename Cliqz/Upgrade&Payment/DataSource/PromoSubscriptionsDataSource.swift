@@ -16,7 +16,7 @@ class PromoSubscriptionsDataSource {
     init(promoType: LumenSubscriptionPromoPlanType, availablePromoSubscription: [LumenSubscriptionProduct]) {
         self.promoType = promoType
         if let promoProduct = availablePromoSubscription.filter({ $0.product.productIdentifier == promoType.promoID }).first {
-            self.subscriptionInfo = SubscriptionCellInfo(priceDetails: nil, offerDetails: self.offerDetails(plan: promoType), isSubscribed: SubscriptionController.shared.hasSubscription(promoProduct.subscriptionPlan), height: 150, telemetryTarget: self.telemetryTarget(), lumenProduct: promoProduct)
+            self.subscriptionInfo = SubscriptionCellInfo(priceDetails: nil, offerDetails: self.offerDetails(plan: promoType), isSubscribed: SubscriptionController.shared.hasSubscription(promoProduct.subscriptionPlan), height: 150, telemetrySignals: self.telemeterySignals(), lumenProduct: promoProduct)
         }
 	}
 
@@ -49,12 +49,12 @@ class PromoSubscriptionsDataSource {
 	}
     
     // MARK: Private methods
-    private func telemetryTarget() -> String {
+    private func telemeterySignals() -> [String:String] {
         switch self.promoType.type {
         case .half:
-            return "subscribe_basic_vpn_offer_half"
+            return ["target" : "subscribe_basic_vpn_offer_half", "view" : "offer_half" ]
         case .freeMonth:
-            return "subscribe_basic_vpn_offer_free"
+            return ["target" : "subscribe_basic_vpn_offer_free", "view" : "offer_free" ]
         }
     }
     

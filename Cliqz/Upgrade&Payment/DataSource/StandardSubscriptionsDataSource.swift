@@ -30,16 +30,17 @@ class StandardSubscriptionsDataSource {
 	}
     
     // MARK: Private methods
-    private func telemeteryTarget(product: LumenSubscriptionProduct) -> String {
+    private func telemeterySignals(product: LumenSubscriptionProduct) -> [String:String] {
         switch product.subscriptionPlan {
         case .basic:
-            return "subscribe_basic"
+            return ["target" : "subscribe_basic", "view" : "regular" ]
         case .vpn:
-            return "subscribe_vpn"
+            return ["target" : "subscribe_vpn", "view" : "regular" ]
         case .basicAndVpn:
-            return "subscribe_basic_vpn"
+            return ["target" : "subscribe_basic_vpn", "view" : "regular" ]
         }
     }
+    
     private func generateSubscriptionInfos(products: [LumenSubscriptionProduct]) {
         self.subscriptionInfos.removeAll()
         for product in products {
@@ -52,8 +53,8 @@ class StandardSubscriptionsDataSource {
             default:
                 break
             }
-            let telemetryTarget = self.telemeteryTarget(product: product)
-            let info = SubscriptionCellInfo(priceDetails: nil, offerDetails: offerDetails, isSubscribed: SubscriptionController.shared.hasSubscription(product.subscriptionPlan), height: height, telemetryTarget: telemetryTarget, lumenProduct: product)
+            let telemetries = self.telemeterySignals(product: product)
+            let info = SubscriptionCellInfo(priceDetails: nil, offerDetails: offerDetails, isSubscribed: SubscriptionController.shared.hasSubscription(product.subscriptionPlan), height: height, telemetrySignals: telemetries, lumenProduct: product)
             self.subscriptionInfos.append(info)
         }
         self.subscriptionInfos.sort { (left, right) -> Bool in

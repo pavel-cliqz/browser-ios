@@ -33,7 +33,7 @@ class UpgradLumenViewController: UIViewController {
     private let privacyPolicyButton = UIButton()
     private let gradient = BrowserGradientView()
     private let notchOffset = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-    private var telemetryTarget: String?
+    private var telemetrySignals: [String:String]?
     
     private let buttonAttributes : [NSAttributedStringKey: Any] = [
         NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12.0, weight: .medium),
@@ -41,7 +41,7 @@ class UpgradLumenViewController: UIViewController {
         NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue]
     
     private var isConditionsHidden = true
-    private var lastChosenProduct: LumenSubscriptionProduct?
+    private var selectedProduct: LumenSubscriptionProduct?
 
     private var subscriptionsDataSource:StandardSubscriptionsDataSource!
 
@@ -228,8 +228,8 @@ class UpgradLumenViewController: UIViewController {
     }
     
     @objc func restoreSubscription() {
-        telemetryTarget = "restore"
-        LegacyTelemetryHelper.logPayment(action: "click", target: telemetryTarget)
+        self.telemetrySignals?["target"] = "restore"
+        LegacyTelemetryHelper.logPayment(action: "click", target: self.telemetrySignals?["target"])
         SubscriptionController.shared.restorePurchases()
 	}
 
@@ -246,18 +246,25 @@ class UpgradLumenViewController: UIViewController {
     }
     
     @objc func handlePurchaseSuccessNotification(_ notification: Notification) {
-        LegacyTelemetryHelper.logPayment(action: "success", target: telemetryTarget)
+        LegacyTelemetryHelper.logPayment(action: "success", target: self.telemetrySignals?["target"])
+        self.selectedProduct = nil
+        self.telemetrySignals = nil
         self.dismiss(animated: true)
     }
     
     @objc func handlePurchaseErrorNotification(_ notification: Notification) {
-        LegacyTelemetryHelper.logPayment(action: "error", target: telemetryTarget)
+        guard let lumenProduct = self.selectedProduct else {
+            return
+        }
+        
+        self.selectedProduct = nil
+        
+        LegacyTelemetryHelper.logPayment(action: "error", target: self.telemetrySignals?["target"])
         let errorDescirption = NSLocalizedString("We are sorry, but something went wrong. The payment was not successful, please try again.", tableName: "Lumen", comment: "Error message when there is failing payment transaction")
         let alertController = UIAlertController(title: "", message: errorDescirption, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", tableName: "Lumen", comment: "Retry button title in payment failing transaction alert"), style: .default) {[weak self] (action) in
-            if let lumenProduct = self?.lastChosenProduct {
-                SubscriptionController.shared.buyProduct(lumenProduct.product)
-            }
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Retry", tableName: "Lumen", comment: "Retry button title in payment failing transaction alert"), style: .default) {(action) in
+            self.selectedProduct = lumenProduct
+            SubscriptionController.shared.buyProduct(lumenProduct.product)
         })
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", tableName: "Lumen", comment: "Cancel button title in payment failing transaction alert"), style: .default, handler: nil))
@@ -385,9 +392,9 @@ extension UpgradLumenViewController: UITableViewDelegate, UITableViewDataSource 
 		cell.subscriptionInfo = subscriptionInfo
         cell.buyButtonHandler = { [weak self] subscriptionProduct in
             SubscriptionController.shared.buyProduct(subscriptionProduct.product)
-            self?.lastChosenProduct = subscriptionProduct
-            self?.telemetryTarget = subscriptionInfo?.telemetryTarget
-            LegacyTelemetryHelper.logPayment(action: "click", target: self?.telemetryTarget)
+            self?.selectedProduct = subscriptionProduct
+            self?.telemetrySignals = subscriptionInfo?.telemetrySignals
+            LegacyTelemetryHelper.logPayment(action: "click", target: self?.telemetrySignals?["target"])
         }
         return cell
     }
