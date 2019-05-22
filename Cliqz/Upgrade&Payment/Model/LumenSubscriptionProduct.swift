@@ -16,15 +16,4 @@ open class LumenSubscriptionProduct {
         self.product = product
         self.subscriptionPlan = plan
     }
-    
-    func telemeteryTarget() -> String {
-        switch self.subscriptionPlan {
-        case .basic:
-            return "subscribe_basic"
-        case .vpn:
-            return "subscribe_vpn"
-        case .basicAndVpn:
-            return "subscribe_basic_vpn"
-        }
-    }
 }

@@ -14,6 +14,7 @@ struct SubscriptionCellInfo {
 	let offerDetails: String?
 	let isSubscribed: Bool
     let height: CGFloat
+    let telemetryTarget: String
     var lumenProduct: LumenSubscriptionProduct
     var localizedPrice: String {
         // in future the period also can be dinamically taken from product. see subscriptionPeriod property
@@ -56,4 +57,5 @@ struct SubscriptionCellInfo {
         let formattedPrice = formatter.string(from: lumenProduct.product.introductoryPrice?.price ?? lumenProduct.product.price) ?? ""
         return formattedPrice
     }
+    
 }
