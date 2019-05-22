@@ -430,6 +430,7 @@
 		4F648C24228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C23228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift */; };
 		4F648C26228DFCC300F9C751 /* SubscriptionCellInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C25228DFCC300F9C751 /* SubscriptionCellInfo.swift */; };
 		4F648C28228EC36700F9C751 /* LumenSubsriptionPlans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C27228EC36700F9C751 /* LumenSubsriptionPlans.swift */; };
+		4F648C9B2294076E00F9C751 /* UpgradeViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C9A2294076E00F9C751 /* UpgradeViewControllerFactory.swift */; };
 		4F69309A2048185600FB0B2E /* TopSitesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6930992048185600FB0B2E /* TopSitesDataSource.swift */; };
 		4F70E0CB22258F8B00412270 /* LumenPrivacyStateControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F70E0CA22258F8B00412270 /* LumenPrivacyStateControl.swift */; };
 		4F70E10F222D26D700412270 /* SavedTimeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F70E10E222D26D700412270 /* SavedTimeDataSource.swift */; };
@@ -1877,6 +1878,7 @@
 		4F648C23228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoSubscriptionsDataSource.swift; sourceTree = "<group>"; };
 		4F648C25228DFCC300F9C751 /* SubscriptionCellInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCellInfo.swift; sourceTree = "<group>"; };
 		4F648C27228EC36700F9C751 /* LumenSubsriptionPlans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenSubsriptionPlans.swift; sourceTree = "<group>"; };
+		4F648C9A2294076E00F9C751 /* UpgradeViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeViewControllerFactory.swift; sourceTree = "<group>"; };
 		4F6930992048185600FB0B2E /* TopSitesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSitesDataSource.swift; sourceTree = "<group>"; };
 		4F70E0CA22258F8B00412270 /* LumenPrivacyStateControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenPrivacyStateControl.swift; sourceTree = "<group>"; };
 		4F70E10E222D26D700412270 /* SavedTimeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTimeDataSource.swift; sourceTree = "<group>"; };
@@ -3640,6 +3642,7 @@
 				4F934B3122048ACD005D438C /* TrialExpiredView.swift */,
 				4F934B3222048ACD005D438C /* UpgradeView.swift */,
 				4F648C1C228C58C100F9C751 /* PromoUpgradeViewController.swift */,
+				4F648C9A2294076E00F9C751 /* UpgradeViewControllerFactory.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6923,6 +6926,7 @@
 				D3C744CD1A687D6C004CE85D /* URIFixup.swift in Sources */,
 				4FE43F6322202F0C00045527 /* AntitrackingContextualOnboardingView.swift in Sources */,
 				4F1860332088F3DC00A86D4C /* Privacy.swift in Sources */,
+				4F648C9B2294076E00F9C751 /* UpgradeViewControllerFactory.swift in Sources */,
 				39AC591A1CC574AB0042C2F5 /* HomePageSettingsViewController.swift in Sources */,
 				E4A961181AC041C40069AD6F /* ReadabilityService.swift in Sources */,
 				D3BE7B261B054D4400641031 /* main.swift in Sources */,
