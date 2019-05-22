@@ -62,6 +62,21 @@ class RevenueCatService: NSObject, IAPService {
 		})
     }
     
+    public func isUserPromoEligible(productID:String, completion: @escaping (Bool) -> Void) {
+        guard let purchases = purchases else {
+            completion(false)
+            return
+        }
+        
+        purchases.checkTrialOrIntroductoryPriceEligibility([productID]) { (result) in
+            if let eligible = result[productID]?.status {
+                completion(eligible != .ineligible)
+            } else {
+                completion(false)
+            }
+        }
+    }
+        
     public func restorePurchases() {
 		purchases?.restoreTransactions({ (purchaserInfo, error) in
             if let error = error as? SKError, error.code != .paymentCancelled {

@@ -150,6 +150,10 @@ public class SubscriptionController {
         }
     }
     
+    public func isEligible(for productID: String, completion:@escaping (Bool) -> Void) {
+        storeService.isUserPromoEligible(productID: productID, completion: completion)
+    }
+    
     public func buyProduct(_ product: SKProduct) {
         storeService.buyProduct(product)
     }

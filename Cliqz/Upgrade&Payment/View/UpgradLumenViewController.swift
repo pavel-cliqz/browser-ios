@@ -366,16 +366,40 @@ class UpgradLumenViewController: UIViewController {
 	}
 
 	private func applyPromoCode(code: String?) {
-		if let code = code, PromoCodesManager.shared.isValidPromoCode(code),
-			let promoViewController = UpgradeViewControllerFactory.promoUpgradeViewController(promoCode: code) {
-			self.navigationController?.pushViewController(promoViewController, animated: false)
+		if let code = code, PromoCodesManager.shared.isValidPromoCode(code) {
+            let promoType = PromoCodesManager.shared.getPromoType(code)
+            if let productID = promoType?.promoID {
+                SubscriptionController.shared.isEligible(for: productID) {[weak self] (eligible) in
+                    if eligible {
+                        if let promoViewController = UpgradeViewControllerFactory.promoUpgradeViewController(promoCode: code) {
+                            self?.navigationController?.pushViewController(promoViewController, animated: false)
+                        } else {
+                            assert(false, "Design problem, please investigate")
+                            self?.showInvalidPromoAlert()
+                        }
+                    } else {
+                        self?.showNotEligible()
+                    }
+                }
+            
+            } else {
+                showInvalidPromoAlert()
+            }
 		} else {
 			showInvalidPromoAlert()
 		}
 	}
 
-	private func showInvalidPromoAlert() {
+    private func showNotEligible() {
         LegacyTelemetryHelper.logPromoPayment(action: "show", view: "error", topic: "not_eligible")
+        let alertView = UIAlertController(title: NSLocalizedString("Sorry, it seems you have used a code before", tableName: "Lumen", comment: "[Upgrade flow] Invalid Promo code alert view title") , message: nil, preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: NSLocalizedString("Close", tableName: "Lumen", comment: "[Upgrade flow] Close button title on invalid promo  code alert"), style: .cancel)
+        alertView.addAction(closeAction)
+        self.present(alertView, animated: true)
+    }
+    
+	private func showInvalidPromoAlert() {
+        LegacyTelemetryHelper.logPromoPayment(action: "show", view: "error", topic: "invalid_code")
 		let alertView = UIAlertController(title: NSLocalizedString("Sorry, this code does not seem to work", tableName: "Lumen", comment: "[Upgrade flow] Invalid Promo code alert view title") , message: nil, preferredStyle: .alert)
 		let closeAction = UIAlertAction(title: NSLocalizedString("Close", tableName: "Lumen", comment: "[Upgrade flow] Close button title on invalid promo  code alert"), style: .cancel)
 		alertView.addAction(closeAction)

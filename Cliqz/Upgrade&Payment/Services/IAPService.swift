@@ -21,6 +21,7 @@ extension Notification.Name {
 
 protocol IAPService {
     func requestProducts(completionHandler: @escaping ProductsRequestCompletionHandler)
+    func isUserPromoEligible(productID:String, completion: @escaping (Bool) -> Void)
     func buyProduct(_ product: SKProduct)
     func restorePurchases()
     func getSubscriptionUserId() -> String?
