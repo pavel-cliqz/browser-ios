@@ -54,7 +54,7 @@ class StandardSubscriptionsDataSource {
                 break
             }
             let telemetries = self.telemeterySignals(product: product)
-            let info = SubscriptionCellInfo(priceDetails: nil, offerDetails: offerDetails, isSubscribed: SubscriptionController.shared.hasSubscription(product.subscriptionPlan), height: height, telemetrySignals: telemetries, lumenProduct: product)
+			let info = SubscriptionCellInfo(priceDetails: nil, promoPriceDetails: nil, offerDetails: offerDetails, isSubscribed: SubscriptionController.shared.hasSubscription(product.subscriptionPlan), height: height, telemetrySignals: telemetries, lumenProduct: product)
             self.subscriptionInfos.append(info)
         }
         self.subscriptionInfos.sort { (left, right) -> Bool in
