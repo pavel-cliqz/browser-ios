@@ -26,6 +26,11 @@ class SubscriptionDataSource {
         self.delegate = delegate
     }
     
+    func fetchProducts(completion: ((Bool) -> Void)? = nil) {
+        assert(false, "Derived classes must override this method")
+        completion?(false)
+    }
+    
     func subscriptionsCount() -> Int {
         return self.subscriptionInfos.count
     }
@@ -37,25 +42,6 @@ class SubscriptionDataSource {
     
     func subscriptionInfo(indexPath: IndexPath) -> SubscriptionCellInfo? {
         return self.subscriptionInfos[indexPath.row]
-    }
-    
-    func fetchProducts(completion: ((Bool) -> Void)? = nil) {
-        guard let delegate = self.delegate else {
-            completion?(false)
-            return
-        }
-        delegate.retrieveStandartProducts {[weak self] (products) in
-            guard products.count > 0 else {
-                completion?(false)
-                return
-            }
-            self?.generateSubscriptionInfos(products: products)
-            completion?(true)
-        }
-    }
-    
-    func generateSubscriptionInfos(products: [LumenSubscriptionProduct]) {
-        assert(false, "Derived classes must override this method")
     }
     
     func telemeterySignals(product: LumenSubscriptionProduct? = nil) -> [String:String] {
