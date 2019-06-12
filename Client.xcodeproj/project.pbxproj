@@ -631,9 +631,9 @@
 		C4E398601D22C409004E89BA /* TopTabsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E3985F1D22C409004E89BA /* TopTabsLayout.swift */; };
 		C4EFEECF1CEBB6F2009762A4 /* BackForwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EFEECE1CEBB6F2009762A4 /* BackForwardTableViewCell.swift */; };
 		C4F3B29A1CFCF93A00966259 /* ButtonToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3B2991CFCF93A00966259 /* ButtonToast.swift */; };
-		C50A32EB22B123C8006236F9 /* PromoUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */; };
-		C50A32EC22B123C9006236F9 /* UpgradLumenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */; };
-		C50A32ED22B123C9006236F9 /* BaseUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */; };
+		C50A330922B12F8B006236F9 /* BaseUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A330622B12F8B006236F9 /* BaseUpgradeViewController.swift */; };
+		C50A330A22B12F8B006236F9 /* PromoUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A330722B12F8B006236F9 /* PromoUpgradeViewController.swift */; };
+		C50A330B22B12F8B006236F9 /* UpgradLumenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A330822B12F8B006236F9 /* UpgradLumenViewController.swift */; };
 		C50B4A91229C46AA00B5FBEB /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50B4A88229C46A900B5FBEB /* SubscriptionDataSource.swift */; };
 		C50C4FA32277428B009B362E /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C4FA22277428A009B362E /* VPN.swift */; };
 		C599C1B1228ADEE5006985F1 /* UserNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599C1B0228ADEE5006985F1 /* UserNotificationsManager.swift */; };
@@ -2075,9 +2075,9 @@
 		C4E3985F1D22C409004E89BA /* TopTabsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTabsLayout.swift; sourceTree = "<group>"; };
 		C4EFEECE1CEBB6F2009762A4 /* BackForwardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackForwardTableViewCell.swift; sourceTree = "<group>"; };
 		C4F3B2991CFCF93A00966259 /* ButtonToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonToast.swift; sourceTree = "<group>"; };
-		C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PromoUpgradeViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/PromoUpgradeViewController.swift"; sourceTree = SOURCE_ROOT; };
-		C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradLumenViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/UpgradLumenViewController.swift"; sourceTree = SOURCE_ROOT; };
-		C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUpgradeViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/BaseUpgradeViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C50A330622B12F8B006236F9 /* BaseUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseUpgradeViewController.swift; sourceTree = "<group>"; };
+		C50A330722B12F8B006236F9 /* PromoUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoUpgradeViewController.swift; sourceTree = "<group>"; };
+		C50A330822B12F8B006236F9 /* UpgradLumenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradLumenViewController.swift; sourceTree = "<group>"; };
 		C50B4A88229C46A900B5FBEB /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
 		C50C4FA22277428A009B362E /* VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPN.swift; sourceTree = "<group>"; };
 		C599C1B0228ADEE5006985F1 /* UserNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsManager.swift; sourceTree = "<group>"; };
@@ -3641,7 +3641,7 @@
 		4F934B2F22048ACD005D438C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C50A32DF22B12396006236F9 /* UpgradeViews */,
+				C50A330522B12F8B006236F9 /* UpgradeViews */,
 				4F934B3E22048AE8005D438C /* ButtonWithUnderlinedText.swift */,
 				1E0EC3E62209A95300EC3A38 /* SubscriptionTableViewCell.swift */,
 				4F934B3122048ACD005D438C /* TrialExpiredView.swift */,
@@ -4030,15 +4030,14 @@
 			path = URLBar;
 			sourceTree = "<group>";
 		};
-		C50A32DF22B12396006236F9 /* UpgradeViews */ = {
+		C50A330522B12F8B006236F9 /* UpgradeViews */ = {
 			isa = PBXGroup;
 			children = (
-				C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */,
-				C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */,
-				C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */,
+				C50A330622B12F8B006236F9 /* BaseUpgradeViewController.swift */,
+				C50A330722B12F8B006236F9 /* PromoUpgradeViewController.swift */,
+				C50A330822B12F8B006236F9 /* UpgradLumenViewController.swift */,
 			);
-			name = UpgradeViews;
-			path = SubscriptionViews;
+			path = UpgradeViews;
 			sourceTree = "<group>";
 		};
 		C599C1A7228ADEC7006985F1 /* Notifications */ = {
@@ -6601,7 +6600,6 @@
 				1E351C3B21CA994800275941 /* BrowserViewController+FindInPage.swift in Sources */,
 				AF6C8AFF21873CB9006F8166 /* VPNCountryController.swift in Sources */,
 				AF6C8B0021873CB9006F8166 /* VPNViewController.swift in Sources */,
-				C50A32EC22B123C9006236F9 /* UpgradLumenViewController.swift in Sources */,
 				4F304595204FEC5500C99162 /* PanelDataObservers.swift in Sources */,
 				D04CD74A216CF86B004FF5B0 /* SiriShortcuts.swift in Sources */,
 				EB9A179F20E6C1A200B12184 /* ThemedWidgets.swift in Sources */,
@@ -6665,7 +6663,6 @@
 				AF2A979F213432D800A37E4E /* FirefoxSearchViewController.swift in Sources */,
 				EB2A63341F3B49A7004EF8B0 /* ContentBlockerHelper.swift in Sources */,
 				FA6B2AC21D41F02D00429414 /* Punycode.swift in Sources */,
-				C50A32EB22B123C8006236F9 /* PromoUpgradeViewController.swift in Sources */,
 				4F30F5092051670C0049E4F6 /* AutoCompletionBridge.m in Sources */,
 				D301AAEE1A3A55B70078DD1D /* TabTrayController.swift in Sources */,
 				1E244CDA2180A082004A73E9 /* CCWidget.swift in Sources */,
@@ -6728,7 +6725,6 @@
 				AF7DD43020F77B790090956F /* LoadingNotificationManager.swift in Sources */,
 				1E244CD72180A082004A73E9 /* CCAbstractCell.swift in Sources */,
 				D87F84AC20B891160091F2DA /* TabDisplayManager.swift in Sources */,
-				C50A32ED22B123C9006236F9 /* BaseUpgradeViewController.swift in Sources */,
 				D0C95EF6201A55A800E4E51C /* BrowserViewController+UIDropInteractionDelegate.swift in Sources */,
 				D31CF65C1CC1959A001D0BD0 /* PrivilegedRequest.swift in Sources */,
 				4F70E11D222D6AEE00412270 /* WidgetGeneralInfoViewController.swift in Sources */,
@@ -6808,6 +6804,7 @@
 				E698FFDA1B4AADF40001F623 /* TabScrollController.swift in Sources */,
 				1E2720CB21788DD000A8ADD4 /* PaidControlCenterViewController.swift in Sources */,
 				4F648C28228EC36700F9C751 /* LumenSubsriptionPlans.swift in Sources */,
+				C50A330A22B12F8B006236F9 /* PromoUpgradeViewController.swift in Sources */,
 				D34510881ACF415700EC27F0 /* SearchLoader.swift in Sources */,
 				1E0EC3E72209A95400EC3A38 /* SubscriptionTableViewCell.swift in Sources */,
 				E65075521E37F6D1006961AC /* UIViewExtensions.swift in Sources */,
@@ -6896,6 +6893,7 @@
 				AF6FA99020652D4600D7F9F0 /* TrackerListHosts.swift in Sources */,
 				392ED6B71D06E85E009D9B62 /* NewTabChoiceViewController.swift in Sources */,
 				E4B3348C1BC01D8F004E2BFF /* AdjustIntegration.swift in Sources */,
+				C50A330B22B12F8B006236F9 /* UpgradLumenViewController.swift in Sources */,
 				4F30F5112051670C0049E4F6 /* QuerySuggestion.swift in Sources */,
 				1EAFE570205FFE82006A36B4 /* RegionalSettingsTableViewController.swift in Sources */,
 				E65075541E37F6FC006961AC /* DynamicFontHelper.swift in Sources */,
@@ -6932,6 +6930,7 @@
 				AFA1DE0A2088BDDB00B27B8A /* Identifiers.swift in Sources */,
 				EB11A1042044A90E0018F749 /* ContentBlockerHelper+Whitelist.swift in Sources */,
 				A93067E81D0FE18E00C49C6E /* NightModeHelper.swift in Sources */,
+				C50A330922B12F8B006236F9 /* BaseUpgradeViewController.swift in Sources */,
 				AF6FA98C20652D4600D7F9F0 /* TrackerListPath.swift in Sources */,
 				3B39EDCB1E16E1AA00EF029F /* CustomSearchViewController.swift in Sources */,
 				E65075571E37F714006961AC /* FaviconFetcher.swift in Sources */,
