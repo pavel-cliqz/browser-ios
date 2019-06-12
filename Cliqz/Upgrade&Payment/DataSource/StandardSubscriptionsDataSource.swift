@@ -9,26 +9,15 @@
 import Foundation
 import StoreKit
 
-class StandardSubscriptionsDataSource: SubscriptionDataSoruce {
-    
-    func fetchProducts(completion: ((Bool) -> Void)? = nil) {
-        guard let delegate = self.delegate else {
-            completion?(false)
-            return
-        }
-        delegate.retrieveStandartProducts {[weak self] (products) in
-            guard products.count > 0 else {
-                completion?(false)
-                return
-            }
-            self?.generateSubscriptionInfos(products: products)
-            completion?(true)
-        }
-    }
+class StandardSubscriptionsDataSource: SubscriptionDataSource {
 	
-    // MARK: Private methods
-    private func telemeterySignals(product: LumenSubscriptionProduct) -> [String:String] {
-        switch product.subscriptionPlan {
+    override func telemeterySignals(product: LumenSubscriptionProduct? = nil) -> [String:String] {
+        guard product != nil else {
+            assert(false, "Design problem, product shouldn't be nil. Investigate!")
+            return [:]
+        }
+        
+        switch product!.subscriptionPlan {
         case .basic:
             return ["target" : "subscribe_basic", "view" : "regular" ]
         case .vpn:
@@ -38,7 +27,7 @@ class StandardSubscriptionsDataSource: SubscriptionDataSoruce {
         }
     }
     
-    private func generateSubscriptionInfos(products: [LumenSubscriptionProduct]) {
+    override func generateSubscriptionInfos(products: [LumenSubscriptionProduct]) {
         self.subscriptionInfos.removeAll()
         for product in products {
             var offerDetails: String? = nil
@@ -46,7 +35,7 @@ class StandardSubscriptionsDataSource: SubscriptionDataSoruce {
             switch product.subscriptionPlan {
             case .basicAndVpn(_):
                 offerDetails = NSLocalizedString("BEST OFFER LIMITED TIME ONLY", tableName: "Lumen", value:"BEST OFFER\nLIMITED TIME ONLY", comment: "BEST OFFER\nLIMITED TIME ONLY")
-                height = 150
+                height = kSubscriptionCellHeight
             default:
                 break
             }
@@ -57,6 +46,10 @@ class StandardSubscriptionsDataSource: SubscriptionDataSoruce {
         self.subscriptionInfos.sort { (left, right) -> Bool in
             return left.lumenProduct.subscriptionPlan < right.lumenProduct.subscriptionPlan
         }
+    }
+    
+    override func getConditionText() -> String {
+        return NSLocalizedString("Subscriptions will be applied to your iTunes account on confirmation. Subscriptions will automatically renew unless canceled within 24-hours before the end of the current period‌. You can cancel anytime in your iTunes account settings. Any unused portion of a free trial will be forfeited if you purchase a subscription.", tableName: "Lumen", comment: "[Upgrade Flow] Conditions text")
     }
 
 }

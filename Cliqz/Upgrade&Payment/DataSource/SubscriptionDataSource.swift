@@ -14,7 +14,10 @@ protocol SubscriptionDataSourceDelegate: class {
     func retrievePromoProducts(completion:@escaping ([LumenSubscriptionProduct]) -> Void)
 }
 
-class SubscriptionDataSoruce {
+let kSubscriptionCellHeight: CGFloat = 150.0
+
+class SubscriptionDataSource {
+    
     weak var delegate: SubscriptionDataSourceDelegate!
     
     var subscriptionInfos = [SubscriptionCellInfo]()
@@ -34,5 +37,38 @@ class SubscriptionDataSoruce {
     
     func subscriptionInfo(indexPath: IndexPath) -> SubscriptionCellInfo? {
         return self.subscriptionInfos[indexPath.row]
+    }
+    
+    func fetchProducts(completion: ((Bool) -> Void)? = nil) {
+        guard let delegate = self.delegate else {
+            completion?(false)
+            return
+        }
+        delegate.retrieveStandartProducts {[weak self] (products) in
+            guard products.count > 0 else {
+                completion?(false)
+                return
+            }
+            self?.generateSubscriptionInfos(products: products)
+            completion?(true)
+        }
+    }
+    
+    func generateSubscriptionInfos(products: [LumenSubscriptionProduct]) {
+        assert(false, "Derived classes must override this method")
+    }
+    
+    func telemeterySignals(product: LumenSubscriptionProduct? = nil) -> [String:String] {
+        assert(false, "Derived classes must override this method")
+        return [:]
+    }
+    
+    func getConditionText() -> String {
+        assert(false, "Derived classes must override this method")
+        return ""
+    }
+    
+    func getHeaderText() -> String? {
+        return nil
     }
 }

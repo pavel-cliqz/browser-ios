@@ -424,7 +424,6 @@
 		4F53287521F7579F00FC7F12 /* 3rd_party_cookies_blocker.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F53287421F7579F00FC7F12 /* 3rd_party_cookies_blocker.json */; };
 		4F5F851322380B6400F2565B /* DashboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F851222380B6300F2565B /* DashboardButton.swift */; };
 		4F648C1B228C56C000F9C751 /* promoCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4F648C12228C56C000F9C751 /* promoCodes.json */; };
-		4F648C1D228C58C100F9C751 /* PromoUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C1C228C58C100F9C751 /* PromoUpgradeViewController.swift */; };
 		4F648C1F228C5B2C00F9C751 /* PromoCodesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C1E228C5B2C00F9C751 /* PromoCodesManager.swift */; };
 		4F648C22228DF8A500F9C751 /* StandardSubscriptionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C21228DF8A500F9C751 /* StandardSubscriptionsDataSource.swift */; };
 		4F648C24228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F648C23228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift */; };
@@ -447,7 +446,6 @@
 		4F934B3622048ACD005D438C /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B2A22048ACD005D438C /* IAPService.swift */; };
 		4F934B3722048ACD005D438C /* LumenPurchaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B2C22048ACD005D438C /* LumenPurchaseInfo.swift */; };
 		4F934B3822048ACD005D438C /* LumenSubscriptionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B2D22048ACD005D438C /* LumenSubscriptionType.swift */; };
-		4F934B3A22048ACD005D438C /* UpgradLumenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B3022048ACD005D438C /* UpgradLumenViewController.swift */; };
 		4F934B3B22048ACD005D438C /* TrialExpiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B3122048ACD005D438C /* TrialExpiredView.swift */; };
 		4F934B3C22048ACD005D438C /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B3222048ACD005D438C /* UpgradeView.swift */; };
 		4F934B3D22048ACD005D438C /* SubscriptionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F934B3422048ACD005D438C /* SubscriptionController.swift */; };
@@ -633,6 +631,9 @@
 		C4E398601D22C409004E89BA /* TopTabsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E3985F1D22C409004E89BA /* TopTabsLayout.swift */; };
 		C4EFEECF1CEBB6F2009762A4 /* BackForwardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EFEECE1CEBB6F2009762A4 /* BackForwardTableViewCell.swift */; };
 		C4F3B29A1CFCF93A00966259 /* ButtonToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F3B2991CFCF93A00966259 /* ButtonToast.swift */; };
+		C50A32EB22B123C8006236F9 /* PromoUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */; };
+		C50A32EC22B123C9006236F9 /* UpgradLumenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */; };
+		C50A32ED22B123C9006236F9 /* BaseUpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */; };
 		C50B4A91229C46AA00B5FBEB /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50B4A88229C46A900B5FBEB /* SubscriptionDataSource.swift */; };
 		C50C4FA32277428B009B362E /* VPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50C4FA22277428A009B362E /* VPN.swift */; };
 		C599C1B1228ADEE5006985F1 /* UserNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C599C1B0228ADEE5006985F1 /* UserNotificationsManager.swift */; };
@@ -1873,7 +1874,6 @@
 		4F53287421F7579F00FC7F12 /* 3rd_party_cookies_blocker.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 3rd_party_cookies_blocker.json; sourceTree = "<group>"; };
 		4F5F851222380B6300F2565B /* DashboardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardButton.swift; sourceTree = "<group>"; };
 		4F648C12228C56C000F9C751 /* promoCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = promoCodes.json; sourceTree = "<group>"; };
-		4F648C1C228C58C100F9C751 /* PromoUpgradeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoUpgradeViewController.swift; sourceTree = "<group>"; };
 		4F648C1E228C5B2C00F9C751 /* PromoCodesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesManager.swift; sourceTree = "<group>"; };
 		4F648C21228DF8A500F9C751 /* StandardSubscriptionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardSubscriptionsDataSource.swift; sourceTree = "<group>"; };
 		4F648C23228DF8C200F9C751 /* PromoSubscriptionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoSubscriptionsDataSource.swift; sourceTree = "<group>"; };
@@ -1896,7 +1896,6 @@
 		4F934B2A22048ACD005D438C /* IAPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
 		4F934B2C22048ACD005D438C /* LumenPurchaseInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LumenPurchaseInfo.swift; sourceTree = "<group>"; };
 		4F934B2D22048ACD005D438C /* LumenSubscriptionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LumenSubscriptionType.swift; sourceTree = "<group>"; };
-		4F934B3022048ACD005D438C /* UpgradLumenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradLumenViewController.swift; sourceTree = "<group>"; };
 		4F934B3122048ACD005D438C /* TrialExpiredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrialExpiredView.swift; sourceTree = "<group>"; };
 		4F934B3222048ACD005D438C /* UpgradeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
 		4F934B3422048ACD005D438C /* SubscriptionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionController.swift; sourceTree = "<group>"; };
@@ -2076,6 +2075,9 @@
 		C4E3985F1D22C409004E89BA /* TopTabsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopTabsLayout.swift; sourceTree = "<group>"; };
 		C4EFEECE1CEBB6F2009762A4 /* BackForwardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackForwardTableViewCell.swift; sourceTree = "<group>"; };
 		C4F3B2991CFCF93A00966259 /* ButtonToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonToast.swift; sourceTree = "<group>"; };
+		C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PromoUpgradeViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/PromoUpgradeViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradLumenViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/UpgradLumenViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseUpgradeViewController.swift; path = "Cliqz/Upgrade&Payment/View/UpgradeViews/BaseUpgradeViewController.swift"; sourceTree = SOURCE_ROOT; };
 		C50B4A88229C46A900B5FBEB /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
 		C50C4FA22277428A009B362E /* VPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPN.swift; sourceTree = "<group>"; };
 		C599C1B0228ADEE5006985F1 /* UserNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsManager.swift; sourceTree = "<group>"; };
@@ -3639,12 +3641,11 @@
 		4F934B2F22048ACD005D438C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C50A32DF22B12396006236F9 /* UpgradeViews */,
 				4F934B3E22048AE8005D438C /* ButtonWithUnderlinedText.swift */,
-				4F934B3022048ACD005D438C /* UpgradLumenViewController.swift */,
 				1E0EC3E62209A95300EC3A38 /* SubscriptionTableViewCell.swift */,
 				4F934B3122048ACD005D438C /* TrialExpiredView.swift */,
 				4F934B3222048ACD005D438C /* UpgradeView.swift */,
-				4F648C1C228C58C100F9C751 /* PromoUpgradeViewController.swift */,
 				4F648C9A2294076E00F9C751 /* UpgradeViewControllerFactory.swift */,
 			);
 			path = View;
@@ -4027,6 +4028,17 @@
 				1EDF0B1E207B837F00856493 /* KeyboardAccessoryView.swift */,
 			);
 			path = URLBar;
+			sourceTree = "<group>";
+		};
+		C50A32DF22B12396006236F9 /* UpgradeViews */ = {
+			isa = PBXGroup;
+			children = (
+				C50A32EA22B123C8006236F9 /* BaseUpgradeViewController.swift */,
+				C50A32E822B123C8006236F9 /* PromoUpgradeViewController.swift */,
+				C50A32E922B123C8006236F9 /* UpgradLumenViewController.swift */,
+			);
+			name = UpgradeViews;
+			path = SubscriptionViews;
 			sourceTree = "<group>";
 		};
 		C599C1A7228ADEC7006985F1 /* Notifications */ = {
@@ -6589,6 +6601,7 @@
 				1E351C3B21CA994800275941 /* BrowserViewController+FindInPage.swift in Sources */,
 				AF6C8AFF21873CB9006F8166 /* VPNCountryController.swift in Sources */,
 				AF6C8B0021873CB9006F8166 /* VPNViewController.swift in Sources */,
+				C50A32EC22B123C9006236F9 /* UpgradLumenViewController.swift in Sources */,
 				4F304595204FEC5500C99162 /* PanelDataObservers.swift in Sources */,
 				D04CD74A216CF86B004FF5B0 /* SiriShortcuts.swift in Sources */,
 				EB9A179F20E6C1A200B12184 /* ThemedWidgets.swift in Sources */,
@@ -6652,6 +6665,7 @@
 				AF2A979F213432D800A37E4E /* FirefoxSearchViewController.swift in Sources */,
 				EB2A63341F3B49A7004EF8B0 /* ContentBlockerHelper.swift in Sources */,
 				FA6B2AC21D41F02D00429414 /* Punycode.swift in Sources */,
+				C50A32EB22B123C8006236F9 /* PromoUpgradeViewController.swift in Sources */,
 				4F30F5092051670C0049E4F6 /* AutoCompletionBridge.m in Sources */,
 				D301AAEE1A3A55B70078DD1D /* TabTrayController.swift in Sources */,
 				1E244CDA2180A082004A73E9 /* CCWidget.swift in Sources */,
@@ -6668,7 +6682,6 @@
 				1E244CD82180A082004A73E9 /* CCDataSource.swift in Sources */,
 				1EAFE56B205FFE82006A36B4 /* AutoForgetTabTableViewController.swift in Sources */,
 				D3BE7B461B054F8600641031 /* TestAppDelegate.swift in Sources */,
-				4F648C1D228C58C100F9C751 /* PromoUpgradeViewController.swift in Sources */,
 				4F0445E720334D3400E2C0C7 /* UIDeviceExtension.swift in Sources */,
 				3BB50E111D6274CD004B33DF /* ActivityStreamTopSitesCell.swift in Sources */,
 				0B62EFD21AD63CD100ACB9CD /* Clearables.swift in Sources */,
@@ -6715,6 +6728,7 @@
 				AF7DD43020F77B790090956F /* LoadingNotificationManager.swift in Sources */,
 				1E244CD72180A082004A73E9 /* CCAbstractCell.swift in Sources */,
 				D87F84AC20B891160091F2DA /* TabDisplayManager.swift in Sources */,
+				C50A32ED22B123C9006236F9 /* BaseUpgradeViewController.swift in Sources */,
 				D0C95EF6201A55A800E4E51C /* BrowserViewController+UIDropInteractionDelegate.swift in Sources */,
 				D31CF65C1CC1959A001D0BD0 /* PrivilegedRequest.swift in Sources */,
 				4F70E11D222D6AEE00412270 /* WidgetGeneralInfoViewController.swift in Sources */,
@@ -6888,7 +6902,6 @@
 				C4E3984C1D21F2FD004E89BA /* TabTrayButtonExtensions.swift in Sources */,
 				D3FEC38D1AC4B42F00494F45 /* AutocompleteTextField.swift in Sources */,
 				0BD19A671A25309B0084FBA7 /* NSUserDefaultsPrefs.swift in Sources */,
-				4F934B3A22048ACD005D438C /* UpgradLumenViewController.swift in Sources */,
 				AFDF458220A9C5F20091CA27 /* UILabelExtension.swift in Sources */,
 				1E351C3A21CA994800275941 /* BrowserViewController+ReaderMode.swift in Sources */,
 				1EAFE56F205FFE82006A36B4 /* HumanWebSettingsTableViewController.swift in Sources */,
