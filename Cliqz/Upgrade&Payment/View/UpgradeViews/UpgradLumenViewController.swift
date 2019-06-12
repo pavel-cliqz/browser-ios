@@ -33,8 +33,6 @@ class UpgradLumenViewController: BaseUpgradeViewController {
         NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue]
     
     private var isConditionsHidden = true
-    private var subscriptionsDataSource:StandardSubscriptionsDataSource!
-
 	
     override func viewDidLoad() {
         super.viewDidLoad()		
@@ -239,16 +237,16 @@ class UpgradLumenViewController: BaseUpgradeViewController {
 #if PAID
 extension UpgradLumenViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return subscriptionsDataSource.subscriptionsCount()
+		return dataSource.subscriptionsCount()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return subscriptionsDataSource.subscriptionHeight(indexPath: indexPath)
+		return dataSource.subscriptionHeight(indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! SubscriptionTableViewCell
-        let subscriptionInfo = subscriptionsDataSource.subscriptionInfo(indexPath: indexPath)
+        let subscriptionInfo = dataSource.subscriptionInfo(indexPath: indexPath)
 		cell.subscriptionInfo = subscriptionInfo
         cell.buyButtonHandler = { [weak self] subscriptionProduct in
             SubscriptionController.shared.buyProduct(subscriptionProduct.product)
