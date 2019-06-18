@@ -131,7 +131,7 @@ public class SubscriptionController {
     
     private func supportedSubscriptionPlan(for productIdentifier: String) -> LumenSubscriptionPlanType? {
         for supportedPlans in self.supportedProductPlans {
-            if supportedPlans.containsAssociatedString(string: productIdentifier) {
+            if supportedPlans.hasAssociatedString(string: productIdentifier) {
                 return supportedPlans
             }
         }
